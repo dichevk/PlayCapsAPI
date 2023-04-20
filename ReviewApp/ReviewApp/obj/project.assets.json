@@ -230,11 +230,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ReviewApp\\ReviewApp\\PlayCapsViewer.csproj",
+      "projectUniqueName": "E:\\PlayCapsReviewApp\\ReviewApp\\ReviewApp\\PlayCapsViewer.csproj",
       "projectName": "PlayCapsViewer",
-      "projectPath": "E:\\ReviewApp\\ReviewApp\\PlayCapsViewer.csproj",
+      "projectPath": "E:\\PlayCapsReviewApp\\ReviewApp\\ReviewApp\\PlayCapsViewer.csproj",
       "packagesPath": "C:\\Users\\Warmaster\\.nuget\\packages\\",
-      "outputPath": "E:\\ReviewApp\\ReviewApp\\obj\\",
+      "outputPath": "E:\\PlayCapsReviewApp\\ReviewApp\\ReviewApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

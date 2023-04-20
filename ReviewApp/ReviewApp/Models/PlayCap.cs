@@ -2,7 +2,7 @@
 
 namespace PlayCapsViewer.Models
 {
-    public class PlayCapModel
+    public class PlayCap
     {
         [Key]
         public string Id { get; set; }
