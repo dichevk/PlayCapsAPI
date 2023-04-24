@@ -14,5 +14,6 @@ namespace PlayCapsViewer.Models
 
         public Country Country { get; set; }
 
+        public ICollection<PlayCapsPlayer> PlayCapsPlayer { get; set; }
     }
 }

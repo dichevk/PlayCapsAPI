@@ -13,5 +13,8 @@ namespace PlayCapsViewer.Models
 
         public ICollection<Review> Reviews { get; set; }
 
+        public ICollection<PlayCapsPlayer> PlayCapsPlayer { get; set; }
+        public ICollection<PlayCapsCategory> PlayCapsCategory { get; set; }
+
     }
 }
