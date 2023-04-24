@@ -11,8 +11,7 @@ namespace PlayCapsViewer.Models
         public DateTime StartDate{ get; set; }
         public DateTime EndDate { get; set; }
 
-        public ICollection<Reviewer> Reviewers { get; set; }
-        public ICollection<Player> Players { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
     }
 }
