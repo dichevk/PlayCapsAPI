@@ -1,6 +1,10 @@
-﻿namespace PlayCapsViewer.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PlayCapsViewer.Data
 {
-    public class DataContext
+    public class DataContext : DbContext
     {
+        public DataContext(DbContextOptions<DataContext>options) : base(options) { }
+
     }
 }
