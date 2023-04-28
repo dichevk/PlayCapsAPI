@@ -21,7 +21,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 }); 
 
 var app = builder.Build();
-
+//call seeding
+if (args.Length == 1 && args[0].ToLower() == "seeddata")
+    SeedData(app);
 //seed app connection
 void SeedData(IHost app)
 {
