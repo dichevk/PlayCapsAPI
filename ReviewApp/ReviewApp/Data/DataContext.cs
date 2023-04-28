@@ -17,6 +17,20 @@ namespace PlayCapsViewer.Data
         public DbSet<PlayCapsPlayer> PlayCapsPlayers { get; set; }
         public DbSet<PlayCap> Review { get; set; }
         public DbSet<PlayCap> Reviewer { get; set; }
+
+        //used for many-to-many relationships
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //tell them they are linked together
+            modelBuilder.Entity<PlayCapsCategory>().HasKey(x => new { x.PlayCapId, x.CategoryId }) ;
+            modelBuilder.Entity<PlayCapsCategory>().HasOne(x => x.PlayCap).WithMany(x => x.PlayCapsCategory).HasForeignKey(x => x.CategoryId);
+            modelBuilder.Entity<PlayCapsCategory>().HasOne(x => x.Category).WithMany(x => x.PlayCapsCategory).HasForeignKey(x => x.PlayCapId);
+            
+            modelBuilder.Entity<PlayCapsPlayer>().HasKey(x => new {x.PlayCapId, x.PlayerId});
+            modelBuilder.Entity<PlayCapsPlayer>().HasOne(x => x.PlayCap).WithMany(x => x.PlayCapsPlayer).HasForeignKey(x => x.PlayerId);
+            modelBuilder.Entity<PlayCapsPlayer>().HasOne(x => x.Player).WithMany(x => x.PlayCapsPlayer).HasForeignKey(x => x.PlayCapId);
+
+        }
     }
 
 }

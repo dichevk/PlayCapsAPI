@@ -7,5 +7,7 @@ namespace PlayCapsViewer.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<PlayCapsCategory> PlayCapsCategory { get; set; }
     }
 }
