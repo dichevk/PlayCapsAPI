@@ -7,9 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
 //add the db seed 
 builder.Services.AddTransient<DbSeed>();
 
@@ -21,9 +23,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 }); 
 
 var app = builder.Build();
+
 //call seeding
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
     SeedData(app);
+
 //seed app connection
 void SeedData(IHost app)
 {
