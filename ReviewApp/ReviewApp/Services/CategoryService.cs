@@ -50,18 +50,18 @@ namespace PlayCapsViewer.Services
             return _dataContext.PlayCapsCategories.Where(x => x.CategoryId == categoryId).Select(x => x.PlayCap).ToList();
         }
 
+        public bool UpdateCategory(Category category)
+        {
+           _dataContext.Categories.Update(category);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _dataContext.SaveChanges();
             if (saved > 0)
                 return true;
-            return false; 
-        }
-
-        public bool UpdateCategory(Category category)
-        {
-           _dataContext.Categories.Update(category);
-            return Save();
+            return false;
         }
     }
 }
