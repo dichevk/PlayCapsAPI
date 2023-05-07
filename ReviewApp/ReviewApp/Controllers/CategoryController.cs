@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PlayCapsViewer.DTO;
 using PlayCapsViewer.Interfaces;
+using PlayCapsViewer.Models;
 using PlayCapsViewer.Services;
 
 namespace PlayCapsViewer.Controllers
@@ -18,5 +20,14 @@ namespace PlayCapsViewer.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
+        public IActionResult GetCategories()
+        {
+           var categories = _categoryService.GetCategories();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            return Ok(_mapper.Map<List<CategoryDTO>>(categories));
+        }
     }
 }
