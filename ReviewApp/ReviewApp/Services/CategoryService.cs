@@ -23,45 +23,58 @@ namespace PlayCapsViewer.Services
             return _dataContext.Categories.Any(x => x.Id == id); //returns true if the category exists, false otherwise 
         }
 
-        public bool CreateCategory(Category category)
+        public async Task<bool> CreateCategory(Category category)
         {
-            _dataContext.Categories.Add(category);
-            return Save();
-        }
-
-        public bool DeleteCategory(Category category)
-        {
-            _dataContext?.Categories.Remove(category);
-            return Save();
-        }
-
-        public ICollection<Category> GetCategories()
-        {
-            return _dataContext.Categories.ToList();
-        }
-
-        public Category GetCategory(int id)
-        {
-            return _dataContext.Categories.Where(x => x.Id == id).FirstOrDefault();
-        }
-
-        public ICollection<PlayCap> GetPlayCapByCategory(int categoryId)
-        {
-            return _dataContext.PlayCapsCategories.Where(x => x.CategoryId == categoryId).Select(x => x.PlayCap).ToList();
-        }
-
-        public bool UpdateCategory(Category category)
-        {
-           _dataContext.Categories.Update(category);
-            return Save();
-        }
-
-        public bool Save()
-        {
-            var saved = _dataContext.SaveChanges();
-            if (saved > 0)
+            try
+            {
+                await _dataContext.Categories.AddAsync(category);
+                await _dataContext.SaveChangesAsync();
                 return true;
-            return false;
+            }
+            catch
+            {
+                return false; 
+            }
         }
+
+        public async Task<bool> DeleteCategory(Category category)
+        {
+            try
+            {
+                _dataContext.Categories.Remove(category);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<ICollection<Category>> GetCategories()
+        {
+            var categories = await _dataContext.Categories.ToListAsync();
+            return categories;
+        }
+
+        public async Task<Category> GetCategory(int id)
+        {
+            var category = await _dataContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            return category;
+        }
+
+        public async Task<ICollection<PlayCap>> GetPlayCapByCategory(int categoryId)
+        {
+            var playCap = await _dataContext.PlayCapsCategories.Where(x => x.CategoryId == categoryId).Select(x => x.PlayCap).ToListAsync();
+            return playCap;
+        }
+
+        public async Task<Category> UpdateCategory(Category category)
+        {
+            var updatedCategory = _dataContext.Categories.Update(category);
+            await _dataContext.SaveChangesAsync();
+            return updatedCategory.Entity;
+        }
+
     }
 }
