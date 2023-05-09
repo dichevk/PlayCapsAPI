@@ -21,6 +21,7 @@ namespace PlayCapsViewer
                         PlayCap = new PlayCap()
                         {
                             Name = "Pikachu",
+                            Description = "Pikachu is the legend of pokemons",
                             StartDate = new DateTime(1903,1,1),
                             EndDate = new DateTime(1905,1,1),
                             PlayCapsCategory= new List<PlayCapsCategory>()
@@ -53,6 +54,7 @@ namespace PlayCapsViewer
                         PlayCap = new PlayCap()
                         {
                             Name = "Squirtle",
+                            Description = "Squirtle is a monster from the pokemon golden era",
                             StartDate = new DateTime(1903,1,1),
                             PlayCapsCategory = new List<PlayCapsCategory>()
                             {
@@ -84,6 +86,7 @@ namespace PlayCapsViewer
                         PlayCap = new PlayCap()
                         {
                             Name = "Venasuar",
+                            Description = "Venasaur is a monster from the deep moss",
                             StartDate = new DateTime(1903,1,1),
                             EndDate = new DateTime(1906,1,1),
                             PlayCapsCategory = new List<PlayCapsCategory>()
