@@ -1,4 +1,6 @@
-﻿namespace PlayCapsViewer.DTO
+﻿using PlayCapsViewer.Models;
+
+namespace PlayCapsViewer.DTO
 {
     public class ReviewDTO
     {
