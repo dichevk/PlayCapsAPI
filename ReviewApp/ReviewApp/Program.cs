@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using PlayCapsViewer;
 using PlayCapsViewer.Data;
+using PlayCapsViewer.Interfaces;
+using PlayCapsViewer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+//register the Dependency Injection
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 //add the db seed 
 builder.Services.AddTransient<DbSeed>();

@@ -1,6 +1,8 @@
-﻿namespace PlayCapsViewer.Services
+﻿using PlayCapsViewer.Interfaces;
+
+namespace PlayCapsViewer.Services
 {
-    public class PlayerService
+    public class PlayerService : IPlayerService
     {
     }
 }

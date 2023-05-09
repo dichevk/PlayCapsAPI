@@ -23,27 +23,27 @@ namespace PlayCapsViewer.Services
             return _dataContext.Categories.Any(x => x.Id == id); //returns true if the category exists, false otherwise 
         }
 
-        public async Task<bool> CreateCategory(Category category)
+        public async Task<Category> CreateCategory(Category category)
         {
-            try
-            {
-                await _dataContext.Categories.AddAsync(category);
-                await _dataContext.SaveChangesAsync();
-                return true;
-            }
-            catch
-            {
-                return false; 
-            }
+            
+            var createdCategory = await _dataContext.Categories.AddAsync(category);
+            await _dataContext.SaveChangesAsync();
+            return createdCategory.Entity;
+            
         }
 
-        public async Task<bool> DeleteCategory(Category category)
+        public async Task<bool> DeleteCategory(int categoryId)
         {
             try
             {
-                _dataContext.Categories.Remove(category);
-                await _dataContext.SaveChangesAsync();
-                return true;
+                var categoryToDelete = await _dataContext.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
+                if (categoryToDelete != null)
+                {
+                    _dataContext.Categories.Remove(categoryToDelete);
+                    await _dataContext.SaveChangesAsync();
+                    return true;
+                }
+                return false;
             }
             catch
             {
@@ -63,10 +63,10 @@ namespace PlayCapsViewer.Services
             return category;
         }
 
-        public async Task<ICollection<PlayCap>> GetPlayCapByCategory(int categoryId)
+        public async Task<ICollection<Category>> GetCategoriesByPlayCapId(int playCapId)
         {
-            var playCap = await _dataContext.PlayCapsCategories.Where(x => x.CategoryId == categoryId).Select(x => x.PlayCap).ToListAsync();
-            return playCap;
+            var playCapCategories = await _dataContext.PlayCapsCategories.Where(x => x.PlayCapId == playCapId).Select(x => x.Category).ToListAsync();
+            return playCapCategories;
         }
 
         public async Task<Category> UpdateCategory(Category category)

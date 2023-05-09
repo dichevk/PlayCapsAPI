@@ -6,10 +6,10 @@ namespace PlayCapsViewer.Interfaces
     {
         Task<ICollection<Category>> GetCategories();
         Task<Category> GetCategory(int id);
-        Task<ICollection<PlayCap>> GetPlayCapByCategory(int categoryId);
+        Task<ICollection<Category>> GetCategoriesByPlayCapId(int playCapId);
         bool CategoryExists(int id);
-        Task<bool> CreateCategory(Category category);
+        Task<Category> CreateCategory(Category category);
         Task<Category> UpdateCategory(Category category);
-        Task<bool> DeleteCategory(Category category);
+        Task<bool> DeleteCategory(int categoryId);
     }
 }
