@@ -78,3 +78,9 @@ E:\PlayCapsReviewApp\ReviewApp\ReviewApp\obj\Debug\net6.0\refint\PlayCapsViewer.
 E:\PlayCapsReviewApp\ReviewApp\ReviewApp\obj\Debug\net6.0\PlayCapsViewer.pdb
 E:\PlayCapsReviewApp\ReviewApp\ReviewApp\obj\Debug\net6.0\PlayCapsViewer.genruntimeconfig.cache
 E:\PlayCapsReviewApp\ReviewApp\ReviewApp\obj\Debug\net6.0\ref\PlayCapsViewer.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\Mono.TextTemplating.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\System.CodeDom.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\System.Text.Json.dll
+E:\PlayCapsReviewApp\ReviewApp\ReviewApp\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
