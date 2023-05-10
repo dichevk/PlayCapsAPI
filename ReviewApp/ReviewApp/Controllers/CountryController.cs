@@ -7,15 +7,15 @@ namespace PlayCapsViewer.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/players")]
-    public class PlayerController : Controller
+    [Route("api/[controller]/countries")]
+    public class CountryController : Controller
     {
-        private readonly IPlayerService _playerService;
+        private readonly ICountryService _countryService;
         private readonly IMapper _mapper;
 
-        public PlayerController(IPlayerService playerService, IMapper mapper)
+        public CountryController(ICountryService countryService, IMapper mapper)
         {
-            _playerService = playerService;
+            _countryService = countryService;
             _mapper = mapper;
         }
     }

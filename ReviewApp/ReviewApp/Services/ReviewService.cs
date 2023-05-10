@@ -3,12 +3,13 @@ using PlayCapsViewer.Interfaces;
 
 namespace PlayCapsViewer.Services
 {
-    public class PlayerService : IPlayerService
+    public class ReviewService : IReviewerService
     {
         private DataContext _context;
-        public PlayerService(DataContext context)
+        public ReviewService(DataContext context)
         {
             _context = context;
         }
+
     }
 }

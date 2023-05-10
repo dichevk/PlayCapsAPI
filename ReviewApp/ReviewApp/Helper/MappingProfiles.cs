@@ -1,7 +1,6 @@
 ﻿using PlayCapsViewer.Models;
 using AutoMapper;
 using PlayCapsViewer.DTO;
-using System;
 
 namespace PlayCapsViewer.Helper
 {

@@ -3,10 +3,10 @@ using PlayCapsViewer.Interfaces;
 
 namespace PlayCapsViewer.Services
 {
-    public class PlayerService : IPlayerService
+    public class CountryService : ICountryService
     {
         private DataContext _context;
-        public PlayerService(DataContext context)
+        public CountryService(DataContext context)
         {
             _context = context;
         }

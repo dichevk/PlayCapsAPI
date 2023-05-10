@@ -7,15 +7,15 @@ namespace PlayCapsViewer.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/players")]
-    public class PlayerController : Controller
+    [Route("api/[controller]/reviewers")]
+    public class ReviewerController : Controller
     {
-        private readonly IPlayerService _playerService;
+        private readonly IReviewerService _reviewerService;
         private readonly IMapper _mapper;
 
-        public PlayerController(IPlayerService playerService, IMapper mapper)
+        public ReviewerController(IReviewerService reviewerService, IMapper mapper)
         {
-            _playerService = playerService;
+            _reviewerService = reviewerService;
             _mapper = mapper;
         }
     }

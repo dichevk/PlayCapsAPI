@@ -12,11 +12,13 @@ namespace PlayCapsViewer.Data
         public DbSet<Country> Countries { get; set; }
         public DbSet<PlayCap> PlayCaps { get; set; }
         public DbSet<Player> Players { get; set; }
+        public DbSet<PlayCap> Review { get; set; }
+        public DbSet<PlayCap> Reviewer { get; set; }
+
         //also include join tables
         public DbSet<PlayCapsCategory> PlayCapsCategories { get; set; }
         public DbSet<PlayCapsPlayer> PlayCapsPlayers { get; set; }
-        public DbSet<PlayCap> Review { get; set; }
-        public DbSet<PlayCap> Reviewer { get; set; }
+
 
         //used for many-to-many relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
