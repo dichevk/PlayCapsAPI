@@ -94,9 +94,10 @@ namespace PlayCapsViewer.Controllers
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]
-        public async Task<IActionResult> CreateCategory(Category category)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO category)
         {
-            var updatedCategory = await _categoryService.CreateCategory(category);
+            var categoryMap = _mapper.Map<Category>(category);
+            var updatedCategory = await _categoryService.CreateCategory(categoryMap);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (updatedCategory != null)
@@ -140,9 +141,10 @@ namespace PlayCapsViewer.Controllers
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]
-        public async Task<IActionResult> UpdateCategory(Category category)
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryDTO category)
         {
-            var updatedCategory = await _categoryService.UpdateCategory(category);
+            var categoryMap = _mapper.Map<Category>(category);
+            var updatedCategory = await _categoryService.UpdateCategory(categoryMap);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (updatedCategory != null)
