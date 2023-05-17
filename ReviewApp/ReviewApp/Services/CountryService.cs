@@ -2,6 +2,7 @@
 using PlayCapsViewer.Data;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Models;
+using System.Runtime.InteropServices;
 
 namespace PlayCapsViewer.Services
 {
@@ -43,19 +44,27 @@ namespace PlayCapsViewer.Services
             return await _context.Countries.FirstOrDefaultAsync(x => x.Id == countryId);
         }
 
-        public Task<Country> GetCountryOfPlayer(int playerId)
+        public async Task<Country> GetCountryOfPlayer(int playerId)
         {
-            throw new NotImplementedException();
+            var foundPlayer = await _context.Players.FirstOrDefaultAsync(x => x.Id==playerId);
+            if (foundPlayer!=null)
+            {
+                return foundPlayer.Country;
+            }
+            return null;
         }
 
-        public Task<Country> GetCountryOfReviewer(int reviewerId)
+        public async Task<Country> GetCountryOfReviewer(int reviewerId)
         {
-            throw new NotImplementedException();
+            var foundReviewer = await _context.Reviewer.FirstOrDefaultAsync(x => x.Id == reviewerId);
+            return null;
         }
 
-        public Task<Country> UpdateCountry(Country country)
+        public async Task<Country> UpdateCountry(Country country)
         {
-            throw new NotImplementedException();
+            var updatedCountry =  _context.Countries.Update(country);
+            await _context.SaveChangesAsync();
+            return updatedCountry.Entity;
         }
     }
 }
