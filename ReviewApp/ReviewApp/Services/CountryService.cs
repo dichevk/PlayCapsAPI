@@ -57,8 +57,13 @@ namespace PlayCapsViewer.Services
 
         public async Task<Country> GetCountryOfReviewer(int reviewerId)
         {
-            var foundReviewer = await _context.Reviewer.Select(o => o.Id == reviewerId).FirstOrDefaultAsync();
-            return foundReviewer;
+            var foundCountry = await _context.Players.Where(o => o.Id == reviewerId).Select(c => c.Country).FirstOrDefaultAsync();
+
+            if (foundCountry != null)
+            {
+                return foundCountry;
+            }
+            return null;
         }
 
         public async Task<Country> UpdateCountry(Country country)
