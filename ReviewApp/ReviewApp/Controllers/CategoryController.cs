@@ -45,7 +45,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Get a single category by categoryId with result mapping to the CategoryDTO
         /// </remarks>
-        [Route("/{categoryId}")]
+        [Route("{categoryId}")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
@@ -66,7 +66,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Get categories for a playCap with result mapping to the CategoryDTO
         /// </remarks>
-        [Route("/playCap/{playCapId}")]
+        [Route("playCap/{playCapId}")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         [ProducesResponseType(400)]
@@ -110,7 +110,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Delete a category using the id of the category 
         /// </remarks>
-        [Route("/{categoryId}")]
+        [Route("{categoryId}")]
         [HttpDelete]
         [ProducesResponseType(200, Type = typeof(bool))]
         [ProducesResponseType(400)]

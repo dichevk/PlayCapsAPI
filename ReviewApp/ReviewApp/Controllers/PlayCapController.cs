@@ -7,7 +7,7 @@ namespace PlayCapsViewer.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/playcaps")]
+    [Route("/api/playcaps")]
     public class PlayCapController : Controller 
     {
         private readonly IPlayCapService _playCapService;

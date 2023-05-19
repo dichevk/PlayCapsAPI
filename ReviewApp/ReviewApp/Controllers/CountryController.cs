@@ -7,7 +7,7 @@ namespace PlayCapsViewer.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/countries")]
+    [Route("/api/countries")]
     public class CountryController : Controller
     {
         private readonly ICountryService _countryService;
