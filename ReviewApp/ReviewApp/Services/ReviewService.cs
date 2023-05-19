@@ -3,7 +3,7 @@ using PlayCapsViewer.Interfaces;
 
 namespace PlayCapsViewer.Services
 {
-    public class ReviewService : IReviewerService
+    public class ReviewService : IReviewService
     {
         private DataContext _context;
         public ReviewService(DataContext context)

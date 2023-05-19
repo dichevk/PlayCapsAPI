@@ -16,6 +16,11 @@ builder.Services.AddSwaggerGen();
 
 //register the Dependency Injection
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IPlayCapService, PlayCapService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IReviewerService, ReviewerService>();
 
 //add the db seed 
 builder.Services.AddTransient<DbSeed>();
