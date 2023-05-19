@@ -10,8 +10,7 @@ namespace PlayCapsViewer.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/categories")]
-  
+    [Route("/api/categories")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -29,7 +28,6 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Get all the categories with mapping to the CategoryDTO
         /// </remarks>
-        [Route("/")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         [ProducesResponseType(400, Type = typeof(string))]
@@ -89,7 +87,6 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Create a category using the the category model
         /// </remarks>
-        [Route("/")]
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
@@ -136,7 +133,6 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Update a category using the category object 
         /// </remarks>
-        [Route("/")]
         [HttpPut]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
