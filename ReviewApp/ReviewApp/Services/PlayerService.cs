@@ -13,7 +13,7 @@ namespace PlayCapsViewer.Services
             _context = context;
         }
 
-        public async Task<Player> CreatePlayer(Player player)
+        public async Task<Player?> CreatePlayer(Player player)
         {
             var newPlayer = await _context.Players.AddAsync(player);
             if (newPlayer != null)
@@ -24,14 +24,24 @@ namespace PlayCapsViewer.Services
             return null;
         }
 
-        public Task<bool> DeletePlayer(int playerId)
+        public async Task<bool> DeletePlayer(int playerId)
         {
-            throw new NotImplementedException();
+            var foundPlayer = await _context.Players.FirstOrDefaultAsync(x => x.Id == playerId);
+            if (foundPlayer != null)
+            {
+                _context.Remove(foundPlayer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public async Task<Player> GetPlayer(int id)
+        public async Task<Player?> GetPlayer(int id)
         {
-            return await _context.Players.FirstOrDefaultAsync(x => x.Id == id);   
+            return await _context.Players.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<Player>> GetPlayers()
@@ -39,9 +49,22 @@ namespace PlayCapsViewer.Services
             return await _context.Players.ToListAsync();
         }
 
-        public Task<Player> UpdatePlayer(Player player)
+        public async Task<Player?> UpdatePlayer(Player player)
         {
-            throw new NotImplementedException();
+            var updated = _context.Update(player);
+            var saved = await _context.SaveChangesAsync();
+            if (saved > 0)
+            {
+                return updated.Entity;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public async Task<ICollection<PlayCap>> GetPlayCapByPlayer(int playerId)
+        {
+            return await _context.PlayCapsPlayers.Where(p => p.Player.Id == playerId).Select(p => p.PlayCap).ToListAsync();
         }
     }
 }
