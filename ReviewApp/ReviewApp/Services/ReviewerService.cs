@@ -1,4 +1,5 @@
-﻿using PlayCapsViewer.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PlayCapsViewer.Data;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Models;
 
@@ -14,32 +15,60 @@ namespace PlayCapsViewer.Services
 
         public async Task<Reviewer> CreateReviewer(Reviewer reviewer)
         {
-            var value = await _context.Reviewer.AddAsync(reviewer);
+            await _context.Reviewers.AddAsync(reviewer);
+            await _context.SaveChangesAsync();
+            return reviewer;
         }
 
-        public Task<bool> DeleteReviewer(int reviewerId)
+        public async Task<bool> DeleteReviewer(int reviewerId)
         {
-            throw new NotImplementedException();
+            var reviewer = await _context.Reviewers.Where(x => x.Id == reviewerId).FirstOrDefaultAsync();
+            if (reviewer != null)
+            {
+                _context.Remove(reviewer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public Task<ICollection<Reviewer>> GetAllReviewers()
+        public async Task<ICollection<Reviewer>> GetAllReviewers()
         {
-            throw new NotImplementedException();
+            return await _context.Reviewers.ToListAsync();
         }
 
-        public Task<Reviewer> GetReviewerById(int reviewerId)
+        public async Task<Reviewer> GetReviewerById(int reviewerId)
         {
-            throw new NotImplementedException();
+            var foundReviewer = await _context.Reviewers.Where(x => x.Id == reviewerId).FirstOrDefaultAsync();
+            if (foundReviewer != null)
+            {
+                return foundReviewer;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<Reviewer> GetReviewerByName(string name)
+        public async Task<Reviewer> GetReviewerByName(string name)
         {
-            throw new NotImplementedException();
+            var foundReviewer = await _context.Reviewers.Where(x => (string)x.FirstName.Concat(" ").Concat(x.LastName) == name).FirstOrDefaultAsync();
+
+            if (foundReviewer != null)
+            {
+                return foundReviewer;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public Task<Reviewer> UpdateReviewer(Reviewer reviewer)
+        public async Task<Reviewer> UpdateReviewer(Reviewer reviewer)
         {
-            throw new NotImplementedException();
+            _context.Update(reviewer);
+            await _context.SaveChangesAsync();
+            return reviewer;
         }
     }
 }
