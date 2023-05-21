@@ -13,14 +13,24 @@ namespace PlayCapsViewer.Services
             _context = context;
         }
 
-        public Task<PlayCap> CreatePlayCap(PlayCap playCap, Player player)
+        public Task<PlayCap> CreatePlayCap(PlayCap playCap, int playerId, int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeletePlayCap(int playCapId)
+        public async Task<bool> DeletePlayCap(int playCapId)
         {
-            throw new NotImplementedException();
+            var foundPlayCap = await _context.PlayCaps.FirstOrDefaultAsync(x => x.Id == playCapId);
+            if (foundPlayCap != null)
+            {
+                _context.Remove(foundPlayCap);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Task<ICollection<PlayCap>> GetAllPlayCaps()
@@ -28,9 +38,30 @@ namespace PlayCapsViewer.Services
             throw new NotImplementedException();
         }
 
-        public Task<PlayCap> GetPlayCap(int playCapId)
+        public async Task<PlayCap?> GetPlayCap(int playCapId)
         {
-            throw new NotImplementedException();
+            var foundPlayCap = await _context.PlayCaps.FirstOrDefaultAsync(x => x.Id == playCapId);
+            if (foundPlayCap != null)
+            {
+                return foundPlayCap;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<PlayCap?> GetPlayCapByName(string playCapName)
+        {
+            var foundPlayCap = await _context.PlayCaps.FirstOrDefaultAsync(x => x.Name == playCapName);
+            if (foundPlayCap != null)
+            {
+                return foundPlayCap;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Task<decimal> GetPlayCapRating(int playCapId)
@@ -49,7 +80,7 @@ namespace PlayCapsViewer.Services
             throw new NotImplementedException();
         }
 
-        public Task<PlayCap> UpdatePlayCap(PlayCap playCap)
+        public Task<PlayCap> UpdatePlayCap(PlayCap playCap, int playerId, int categoryId)
         {
             throw new NotImplementedException();
         }

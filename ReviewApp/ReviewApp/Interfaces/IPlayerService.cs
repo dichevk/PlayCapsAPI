@@ -9,6 +9,5 @@ namespace PlayCapsViewer.Interfaces
         Task<Player?> CreatePlayer(Player player);
         Task<Player?> UpdatePlayer(Player player);
         Task<bool> DeletePlayer(int playerId);
-        Task<ICollection<PlayCap>> GetPlayCapByPlayer(int playerId);
     }
 }

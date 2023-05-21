@@ -62,9 +62,5 @@ namespace PlayCapsViewer.Services
                 return null;
             }
         }
-        public async Task<ICollection<PlayCap>> GetPlayCapByPlayer(int playerId)
-        {
-            return await _context.PlayCapsPlayers.Where(p => p.Player.Id == playerId).Select(p => p.PlayCap).ToListAsync();
-        }
     }
 }
