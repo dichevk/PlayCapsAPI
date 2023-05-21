@@ -2,10 +2,10 @@
 {
     public enum PlayCapRarity
     {
-        Common,
-        Rare,
-        Epic,
-        Legendary,
-        Exclusive
+        Common = 0,
+        Rare = 1,
+        Epic = 2,
+        Legendary = 3,
+        Exclusive = 4
     }
 }

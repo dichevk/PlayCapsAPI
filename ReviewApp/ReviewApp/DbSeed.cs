@@ -1,5 +1,6 @@
 ﻿using PlayCapsViewer.Data;
 using PlayCapsViewer.Models;
+using static Azure.Core.HttpHeader;
 
 namespace PlayCapsViewer
 {
@@ -21,7 +22,7 @@ namespace PlayCapsViewer
                         PlayCap = new PlayCap()
                         {
                             Name = "Pikachu",
-                            Description = "Pikachu is the legend of pokemons",
+                            Description = "Pikachu - the exclusive",
                             StartDate = new DateTime(1903,1,1),
                             EndDate = new DateTime(1905,1,1),
                             PlayCapsCategory= new List<PlayCapsCategory>()
@@ -30,19 +31,26 @@ namespace PlayCapsViewer
                             },
                             Reviews = new List<Review>()
                             {
-                                new Review { Title="Pikachu",Text = "Pickahu is the best pokemon, because it is electric", Rating = 5,
-                                Reviewer = new Reviewer(){ FirstName = "Teddy", LastName = "Smith", Country = new Country()
-                            {
-                                Name = "Kanto"
-                            } } },
-                                new Review { Title="Pikachu", Text = "Pickachu is the best a killing rocks", Rating = 5,
+                                new Review
+                                {
+                                    Title="Pikachu",Text = "Pickahu is a mammal-like creatures that have short, yellow fur with brown stripes on their backs, black-tipped ears", Rating = 5,
+                                    Reviewer = new Reviewer()
+                                    {
+                                        FirstName = "Reviewer1", LastName = "LastNameOfReviewer", Country = new Country()
+                                        {
+                                             Name = "Kanto"
+                                        }
+                                    }
+                                },
+                                new Review { Title="Pikachu", Text = "Pickachu is the best at killing rocks", Rating = 5,
                                 Reviewer = new Reviewer(){ FirstName = "Taylor", LastName = "Jones" , Country = new Country() { Name = "Kanto" }} },
                                 new Review { Title="Pikachu",Text = "Pickchu, pickachu, pikachu", Rating = 1,
                                 Reviewer = new Reviewer(){ FirstName = "Jessica", LastName = "McGregor",Country = new Country()
                             {
                                 Name = "Kanto"
                             } } },
-                            }
+                            },
+                            Rarity = Data.Enums.PlayCapRarity.Exclusive,
                         },
                         Player = new Player()
                         {
@@ -60,7 +68,7 @@ namespace PlayCapsViewer
                         PlayCap = new PlayCap()
                         {
                             Name = "Squirtle",
-                            Description = "Squirtle is a monster from the pokemon golden era",
+                            Description = "Squirtle is one of the three starter Pokémon of Kanto available at the beginning of Pokémon Red, Green, Blue, FireRed, and LeafGreen.",
                             StartDate = new DateTime(1903,1,1),
                             PlayCapsCategory = new List<PlayCapsCategory>()
                             {
@@ -68,8 +76,8 @@ namespace PlayCapsViewer
                             },
                             Reviews = new List<Review>()
                             {
-                                new Review { Title= "Squirtle", Text = "squirtle is the best pokemon, because it is electric", Rating = 5,
-                                Reviewer = new Reviewer(){ FirstName = "Teddy", LastName = "Smith",Country = new Country()
+                                new Review { Title= "Squirtle", Text = "squirtle is the best pokemon, because it is one of the three starter Pokémon of Kanto available at the beginning of Pokémon Red, Green, Blue, FireRed, and LeafGreen", Rating = 5,
+                                Reviewer = new Reviewer(){ FirstName = "Reviewer1", LastName = "LastNameOfReviewer",Country = new Country()
                             {
                                 Name = "Kanto"
                             } } },
@@ -83,7 +91,8 @@ namespace PlayCapsViewer
                             {
                                 Name = "Kanto"
                             } } },
-                            }
+                            },
+                            Rarity = Data.Enums.PlayCapRarity.Rare,
                         },
                         Player = new Player()
                         {
@@ -110,8 +119,8 @@ namespace PlayCapsViewer
                             },
                             Reviews = new List<Review>()
                             {
-                                new Review { Title="Veasaur",Text = "Venasuar is the best pokemon, because it is electric", Rating = 5,
-                                Reviewer = new Reviewer(){ FirstName = "Teddy", LastName = "Smith",Country = new Country()
+                                new Review { Title="Veasaur",Text = "Venusaur is the game mascot of Pokémon Green and its remake Pokémon LeafGreen, appearing on the box art of both games.", Rating = 5,
+                                Reviewer = new Reviewer(){ FirstName = "Reviewer1", LastName = "LastNameOfReviewer",Country = new Country()
                             {
                                 Name = "Kanto"
                             } } },
@@ -125,7 +134,8 @@ namespace PlayCapsViewer
                             {
                                 Name = "Halflife"
                             } } },
-                            }
+                            },
+                            Rarity = Data.Enums.PlayCapRarity.Legendary,
                         },
                         Player = new Player()
                         {
