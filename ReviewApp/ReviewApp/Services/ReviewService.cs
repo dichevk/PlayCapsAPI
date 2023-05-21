@@ -1,4 +1,5 @@
-﻿using PlayCapsViewer.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PlayCapsViewer.Data;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Models;
 
@@ -12,49 +13,64 @@ namespace PlayCapsViewer.Services
             _context = context;
         }
 
-        public Task<Review> CreateReview(Review review)
+        public async Task<Review> CreateReview(Review review)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(review);
+            await _context.SaveChangesAsync();
+            return review;
         }
 
-        public Task<bool> DeleteReview(int reviewId)
+        public async Task<bool> DeleteReview(int reviewId)
         {
-            throw new NotImplementedException();
+            var foundReview = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == reviewId);
+            if (foundReview != null)
+            {
+                _context.Remove(foundReview);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public Task<ICollection<Review>> GetAllReviews()
+        public async Task<ICollection<Review>> GetAllReviews()
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.ToListAsync();
         }
 
-        public Task<ICollection<Review>> GetAllReviewsByPlayCap(int playCapId)
+        public async Task<ICollection<Review>> GetAllReviewsByPlayCap(int playCapId)
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.Where(x => x.PlayCap.Id == playCapId).ToListAsync();
         }
 
-        public Task<ICollection<Review>> GetAllReviewsByReviewer(int reviewerId)
+        public async Task<ICollection<Review>> GetAllReviewsByReviewer(int reviewerId)
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.Where(x => x.Reviewer.Id == reviewerId).ToListAsync();
         }
 
-        public Task<ICollection<Review>> GetAllReviewsForPlayCapByReviewer(int reviewerId, int playCapId)
+        public async Task<ICollection<Review>> GetAllReviewsForPlayCapByReviewer(int reviewerId, int playCapId)
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.Where(r => r.Reviewer.Id == reviewerId && r.PlayCap.Id == playCapId).ToListAsync();
         }
 
-        public Task<Review> GetReviewById(int reviewId)
+        public async Task<Review> GetReviewById(int reviewId)
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.FirstOrDefaultAsync(x => x.Id == reviewId);
         }
 
-        public Task<Review> GetReviewByName(string name)
+        public async Task<Review> GetReviewByName(string name)
         {
-            throw new NotImplementedException();
+            return await _context.Reviews.Where(x => (string)x.Reviewer.FirstName.Concat(" ").Concat(x.Reviewer.LastName) == name).FirstOrDefaultAsync();
         }
 
-        public Task<Review> UpdateReview(Review review)
+        public async Task<Review> UpdateReview(Review review)
         {
-            throw new NotImplementedException();
+            _context.Update(review);
+            var updated = await _context.SaveChangesAsync();
+            if (updated > 0)
+            {
+                return review;
+            }
+            return null;
         }
 
     }
