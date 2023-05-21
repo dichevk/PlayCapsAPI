@@ -12,12 +12,17 @@ namespace PlayCapsViewer.Services
             _context = context;
         }
 
-        public Task<Reviewer> CreateReviewer(Reviewer reviewer)
+        public async Task<Reviewer> CreateReviewer(Reviewer reviewer)
+        {
+            var value = await _context.Reviewer.AddAsync(reviewer);
+        }
+
+        public Task<bool> DeleteReviewer(int reviewerId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteReviewer(int reviewerId)
+        public Task<ICollection<Reviewer>> GetAllReviewers()
         {
             throw new NotImplementedException();
         }

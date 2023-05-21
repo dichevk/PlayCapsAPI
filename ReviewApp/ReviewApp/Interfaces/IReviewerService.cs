@@ -9,6 +9,6 @@ namespace PlayCapsViewer.Interfaces
         Task<Reviewer> GetReviewerById(int reviewerId);
         Task<Reviewer> GetReviewerByName(string name);
         Task<bool> DeleteReviewer(int reviewerId);
-
+        Task<ICollection<Reviewer>> GetAllReviewers();
     }
 }

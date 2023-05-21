@@ -22,6 +22,26 @@ namespace PlayCapsViewer.Services
             throw new NotImplementedException();
         }
 
+        public Task<ICollection<Review>> GetAllReviews()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<Review>> GetAllReviewsByPlayCap(int playCapId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<Review>> GetAllReviewsByReviewer(int reviewerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICollection<Review>> GetAllReviewsForPlayCapByReviewer(int reviewerId, int playCapId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Review> GetReviewById(int reviewId)
         {
             throw new NotImplementedException();
@@ -36,5 +56,6 @@ namespace PlayCapsViewer.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }

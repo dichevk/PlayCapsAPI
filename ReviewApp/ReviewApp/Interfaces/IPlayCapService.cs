@@ -1,4 +1,5 @@
-﻿using PlayCapsViewer.Models;
+﻿using PlayCapsViewer.Data.Enums;
+using PlayCapsViewer.Models;
 
 namespace PlayCapsViewer.Interfaces
 {
@@ -9,10 +10,9 @@ namespace PlayCapsViewer.Interfaces
         Task<PlayCap> GetPlayCap(int playCapId);
         Task<PlayCap> GetPlayCapByName(string playCapName);
         Task<ICollection<PlayCap>> GetPlayCapsForPlayer(int playerId);
-        Task<PlayCap> UpdatePlayCap(PlayCap playCap, int playerId, int categoryId);
+        Task<PlayCap> UpdatePlayCap(PlayCap playCap);
         Task<PlayCap> CreatePlayCap(PlayCap playCap, int playerId, int categoryId);
         Task<bool> DeletePlayCap(int playCapId);
         Task<decimal> GetPlayCapRating(int playCapId);
-
     }
 }
