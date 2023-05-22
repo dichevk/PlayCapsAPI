@@ -2,7 +2,6 @@
 using PlayCapsViewer.Data;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Models;
-using System.Runtime.InteropServices;
 
 namespace PlayCapsViewer.Services
 {
@@ -68,7 +67,7 @@ namespace PlayCapsViewer.Services
 
         public async Task<Country> UpdateCountry(Country country)
         {
-            var updatedCountry =  _context.Countries.Update(country);
+            var updatedCountry = _context.Countries.Update(country);
             await _context.SaveChangesAsync();
             return updatedCountry.Entity;
         }

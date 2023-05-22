@@ -33,7 +33,7 @@ namespace PlayCapsViewer.Controllers
         [ProducesResponseType(400, Type = typeof(string))]
         public IActionResult GetCategories()
         {
-           var categories = _categoryService.GetCategories();
+            var categories = _categoryService.GetCategories();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(_mapper.Map<List<CategoryDTO>>(categories));
@@ -45,8 +45,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Get a single category by categoryId with result mapping to the CategoryDTO
         /// </remarks>
-        [Route("{categoryId}")]
-        [HttpGet]
+        [HttpGet("{categoryId}")]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]
@@ -66,8 +65,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Get categories for a playCap with result mapping to the CategoryDTO
         /// </remarks>
-        [Route("playCap/{playCapId}")]
-        [HttpGet]
+        [HttpGet("playCap/{playCapId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]
@@ -110,8 +108,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Delete a category using the id of the category 
         /// </remarks>
-        [Route("{categoryId}")]
-        [HttpDelete]
+        [HttpDelete("{categoryId}")]
         [ProducesResponseType(200, Type = typeof(bool))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]
