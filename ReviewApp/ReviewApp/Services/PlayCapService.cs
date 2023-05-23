@@ -95,12 +95,26 @@ namespace PlayCapsViewer.Services
 
         public async Task<ICollection<PlayCap>> GetPlayCapsByCategory(int categoryId)
         {
+            var category = await _context.Categories.Where(x => x.Id == categoryId).FirstOrDefaultAsync();
+            if (category == null)
+            {
+                return null;
+            }
             var playCaps = await _context.PlayCapsCategories.Where(x => x.CategoryId == categoryId).Select(x => x.PlayCap).ToListAsync();
+            if (playCaps.Count == 0)
+            {
+                return new List<PlayCap>();
+            }
             return playCaps;
         }
 
         public async Task<ICollection<PlayCap>> GetPlayCapsForPlayer(int playerId)
         {
+            var foundPlayer = await _context.Players.Where(x => x.Id == playerId).FirstOrDefaultAsync();
+            if (foundPlayer == null)
+            {
+                return null;
+            }
             var playCapsList = new List<PlayCap>();
             var playerEntities = await _context.PlayCapsPlayers.Where(x => x.PlayerId == playerId).ToListAsync();
             foreach (var playerEntity in playerEntities)

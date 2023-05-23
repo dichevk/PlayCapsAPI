@@ -30,14 +30,15 @@ namespace PlayCapsViewer.Controllers
         [HttpGet]
         [ProducesResponseType(400)]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Country>))]
-        public IActionResult GetCountries()
+        public async Task<IActionResult> GetCountries()
         {
-            var countries = _mapper.Map<List<CountryDTO>>(_countryService.GetCountries());
+            var countries = await _countryService.GetCountries();
+            var countriesMap = _mapper.Map<List<CountryDTO>>(countries);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(countries);
+            return Ok(countriesMap);
         }
         /// <summary>
         /// Get a specific country
