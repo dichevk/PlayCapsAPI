@@ -28,8 +28,8 @@ namespace PlayCapsViewer.Controllers
         /// Get all the countries from the db with mapping to the CategoryDTO
         /// </remarks>
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<CountryDTO>))]
         [ProducesResponseType(400)]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Country>))]
         public async Task<IActionResult> GetCountries()
         {
             var countries = await _countryService.GetCountries();
@@ -43,14 +43,14 @@ namespace PlayCapsViewer.Controllers
         /// <summary>
         /// Get a specific country
         /// </summary>
-        /// <paramref name="countryId">The id of the country</paramref>
+        /// <param name="countryId">The id of the country</param>
         /// <remarks>
         /// Get a specific country by its id 
         /// </remarks>
         [HttpGet("{countryId}")]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(200, Type = typeof(Country))]
         public async Task<IActionResult> GetCountry(int countryId)
         {
             var country = await _countryService.GetCountry(countryId);
@@ -69,15 +69,15 @@ namespace PlayCapsViewer.Controllers
         }
         /// <summary>
         /// Get the country for a specific reviewer
-        /// <paramref name="reviewerId">The id of the reviewer</paramref>
+        /// <param name="reviewerId">The id of the reviewer</param>
         /// </summary>
         /// <remarks>
         /// returns the country of the reviewer
         /// </remarks>
         [HttpGet("/reviewers/{reviewerId}")]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(200, Type = typeof(Country))]
         public async Task<IActionResult> GetCountryOfReviewer(int reviewerId)
         {
             var country = await _countryService.GetCountryOfReviewer(reviewerId);
@@ -95,15 +95,15 @@ namespace PlayCapsViewer.Controllers
         }
         /// <summary>
         /// Get the country for a specific player
-        /// <paramref name="playerId">The id of the player</paramref>
+        /// <param name="playerId">The id of the player</param>
         /// </summary>
         /// <remarks>
         /// returns the country of the player
         /// </remarks>
         [HttpGet("/players/{playerId}")]
+        [ProducesResponseType(200, Type = typeof(CountryDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(200, Type = typeof(Country))]
         public async Task<IActionResult> GetCountryOfPlayer(int playerId)
         {
             var country = await _countryService.GetCountryOfPlayer(playerId);
@@ -121,13 +121,13 @@ namespace PlayCapsViewer.Controllers
         }
         /// <summary>
         /// Create a new country
-        /// <paramref name="countryCreate">The countryDTO received</paramref>
+        /// <param name="countryCreate">The countryDTO received</param>
         /// </summary>
         /// <remarks>
         /// returns the newly created country
         /// </remarks>
         [HttpPost]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200, Type = typeof(Country))]
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
         public async Task<IActionResult> CreateCountry([FromBody] CountryDTO countryCreate)
@@ -158,8 +158,8 @@ namespace PlayCapsViewer.Controllers
         }
         /// <summary>
         /// Update a country
-        /// <paramref name="countryId">The id of the country to be updated</paramref>
-        /// <paramref name="updatedCountry">The countryDTO that contains the new information</paramref>
+        /// <param name="countryId">The id of the country to be updated</param>
+        /// <param name="updatedCountry">The countryDTO that contains the new information</param>
         /// </summary>
         /// <remarks>
         /// returns the upadted country
@@ -196,7 +196,7 @@ namespace PlayCapsViewer.Controllers
         }
         /// <summary>
         /// Delete a country
-        /// <paramref name="countryId">The id of the country to be deleted</paramref>
+        /// <param name="countryId">The id of the country to be deleted</param>
         /// </summary>
         /// <remarks>
         /// returns status 204 if the contry was successfully deleted
