@@ -20,7 +20,15 @@ namespace PlayCapsViewer.Controllers
             _countryService = countryService;
             _mapper = mapper;
         }
+
+        /// <summary>
+        /// Get All Countries
+        /// </summary>
+        /// <remarks>
+        /// Get all the countries from the db with mapping to the CategoryDTO
+        /// </remarks>
         [HttpGet]
+        [ProducesResponseType(400)]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Country>))]
         public IActionResult GetCountries()
         {
@@ -31,7 +39,13 @@ namespace PlayCapsViewer.Controllers
 
             return Ok(countries);
         }
-
+        /// <summary>
+        /// Get a specific country
+        /// </summary>
+        /// <paramref name="countryId">The id of the country</paramref>
+        /// <remarks>
+        /// Get a specific country by its id 
+        /// </remarks>
         [HttpGet("{countryId}")]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
@@ -52,7 +66,39 @@ namespace PlayCapsViewer.Controllers
 
             return Ok(countryObj);
         }
+        /// <summary>
+        /// Get the country for a specific reviewer
+        /// <paramref name="reviewerId">The id of the reviewer</paramref>
+        /// </summary>
+        /// <remarks>
+        /// returns the country of the reviewer
+        /// </remarks>
+        [HttpGet("/reviewers/{reviewerId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(Country))]
+        public async Task<IActionResult> GetCountryOfReviewer(int reviewerId)
+        {
+            var country = await _countryService.GetCountryOfReviewer(reviewerId);
+            if (country == null)
+            {
+                return NotFound("Country for that reviewer was not found");
+            }
+            var countryObj = _mapper.Map<CountryDTO>(
+               country);
 
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            return Ok(countryObj);
+        }
+        /// <summary>
+        /// Get the country for a specific player
+        /// <paramref name="playerId">The id of the player</paramref>
+        /// </summary>
+        /// <remarks>
+        /// returns the country of the player
+        /// </remarks>
         [HttpGet("/players/{playerId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -72,7 +118,13 @@ namespace PlayCapsViewer.Controllers
 
             return Ok(countryObj);
         }
-
+        /// <summary>
+        /// Create a new country
+        /// <paramref name="countryCreate">The countryDTO received</paramref>
+        /// </summary>
+        /// <remarks>
+        /// returns the newly created country
+        /// </remarks>
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -103,12 +155,19 @@ namespace PlayCapsViewer.Controllers
             }
             return Ok(countryMap);
         }
-
+        /// <summary>
+        /// Update a country
+        /// <paramref name="countryId">The id of the country to be updated</paramref>
+        /// <paramref name="updatedCountry">The countryDTO that contains the new information</paramref>
+        /// </summary>
+        /// <remarks>
+        /// returns the upadted country
+        /// </remarks>
         [HttpPut("{countryId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> UpdateCategory(int countryId, [FromBody] CountryDTO updatedCountry)
+        public async Task<IActionResult> UpdateCountry(int countryId, [FromBody] CountryDTO updatedCountry)
         {
             if (updatedCountry == null)
                 return BadRequest(ModelState);
@@ -134,7 +193,13 @@ namespace PlayCapsViewer.Controllers
             }
             return Ok(result);
         }
-
+        /// <summary>
+        /// Delete a country
+        /// <paramref name="countryId">The id of the country to be deleted</paramref>
+        /// </summary>
+        /// <remarks>
+        /// returns status 204 if the contry was successfully deleted
+        /// </remarks>
         [HttpDelete("{countryId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
