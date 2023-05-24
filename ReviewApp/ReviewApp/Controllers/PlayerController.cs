@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using PlayCapsViewer.DTO;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Models;
-using PlayCapsViewer.Services;
 
 namespace PlayCapsViewer.Controllers
 {
