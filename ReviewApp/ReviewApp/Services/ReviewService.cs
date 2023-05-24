@@ -64,11 +64,15 @@ namespace PlayCapsViewer.Services
 
         public async Task<Review> UpdateReview(Review review)
         {
-            _context.Update(review);
-            var updated = await _context.SaveChangesAsync();
-            if (updated > 0)
+            var foundReview = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == review.Id);
+            if (foundReview != null)
             {
-                return review;
+                _context.Update(review);
+                var updated = await _context.SaveChangesAsync();
+                if (updated > 0)
+                {
+                    return review;
+                }
             }
             return null;
         }
