@@ -16,12 +16,13 @@ namespace PlayCapsViewer.Services
         public async Task<Player?> CreatePlayer(Player player)
         {
             var newPlayer = await _context.Players.AddAsync(player);
-            if (newPlayer != null)
+            if (newPlayer == null)
             {
-                await _context.SaveChangesAsync();
-                return newPlayer.Entity;
+                return null;
             }
-            return null;
+            await _context.SaveChangesAsync();
+            return newPlayer.Entity;
+
         }
 
         public async Task<bool> DeletePlayer(int playerId)
@@ -59,13 +60,18 @@ namespace PlayCapsViewer.Services
             return playCapsPlayer.Player;
         }
 
-        public async Task<ICollection<Player>> GetPlayers()
+        public async Task<List<Player>> GetPlayers()
         {
             return await _context.Players.ToListAsync();
         }
 
         public async Task<Player?> UpdatePlayer(Player player)
         {
+            var foundPlayer = await _context.Players.FirstOrDefaultAsync(x => x.Id == player.Id);
+            if (foundPlayer == null)
+            {
+                return null;
+            }
             var updated = _context.Update(player);
             var saved = await _context.SaveChangesAsync();
             if (saved > 0)

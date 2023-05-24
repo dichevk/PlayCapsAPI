@@ -4,7 +4,7 @@ namespace PlayCapsViewer.Interfaces
 {
     public interface IPlayerService
     {
-        Task<ICollection<Player>> GetPlayers();
+        Task<List<Player>> GetPlayers();
         Task<Player?> GetPlayer(int id);
         Task<Player?> GetPlayerOfPlayCap(int playCapId);
         Task<Player?> CreatePlayer(Player player);
