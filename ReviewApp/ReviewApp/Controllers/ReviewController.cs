@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PlayCapsViewer.DTO;
 using PlayCapsViewer.Interfaces;
+using PlayCapsViewer.Models;
 
 namespace PlayCapsViewer.Controllers
 {
@@ -160,6 +161,60 @@ namespace PlayCapsViewer.Controllers
             if (result == null)
             {
                 return NotFound("No reviews found");
+            }
+            return Ok(_mapper.Map<ReviewDTO>(result));
+        }
+        /// <summary>
+        /// Create a new review 
+        /// </summary>
+        /// <param name="reviewInput">the input DTO for the review to be created
+        /// <returns>the newly created review if successful and if it does not exist already, 4xx otherwise</returns>
+        [HttpPost]
+        [ProducesResponseType(200, Type = typeof(Review))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(422)]
+        public async Task<IActionResult> CreateReview([FromBody] ReviewDTO reviewInput)
+        {
+            var reviewMap = _mapper.Map<Review>(reviewInput);
+            var result = await _reviewService.CreateReview(reviewMap);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (result == null)
+            {
+                return NotFound("Creating a review failed");
+            }
+            var existingReview = await _reviewService.GetReviewById(reviewInput.Id);
+            if (existingReview != null)
+            {
+                return UnprocessableEntity();
+            }
+            return Ok(_mapper.Map<ReviewDTO>(result));
+        }
+        /// <summary>
+        /// Update an existing review 
+        /// </summary>
+        /// <param name="reviewInput">the input DTO for the review to be created
+        /// <returns>the newly updated review if successful and if it exists already, 4xx otherwise</returns>
+        [HttpPut]
+        [ProducesResponseType(200, Type = typeof(Review))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> UpdateReview([FromBody] ReviewDTO reviewInput)
+        {
+            var reviewMap = _mapper.Map<Review>(reviewInput);
+            var result = await _reviewService.UpdateReview(reviewMap);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (result == null)
+            {
+                return NotFound("Updating a review failed, please check that the entry you are trying to update exists");
             }
             return Ok(_mapper.Map<ReviewDTO>(result));
         }
