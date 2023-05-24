@@ -8,6 +8,7 @@ namespace PlayCapsViewer.Interfaces
         Task<Review> UpdateReview(Review review);
         Task<Review> GetReviewById(int reviewId);
         Task<Review> GetReviewByName(string name);
+        Task<Review> GetReviewByReviewerId(int reviewerId, int reviewId);
         Task<bool> DeleteReview(int reviewId);
         Task<ICollection<Review>> GetAllReviews();
         Task<ICollection<Review>> GetAllReviewsByReviewer(int reviewerId);

@@ -62,6 +62,11 @@ namespace PlayCapsViewer.Services
             return await _context.Reviews.Where(x => (string)x.Reviewer.FirstName.Concat(" ").Concat(x.Reviewer.LastName) == name).FirstOrDefaultAsync();
         }
 
+        public async Task<Review> GetReviewByReviewerId(int reviewerId, int reviewId)
+        {
+            return await _context.Reviews.Where(x => x.Reviewer.Id == reviewerId && x.Id == reviewId).FirstOrDefaultAsync();
+        }
+
         public async Task<Review> UpdateReview(Review review)
         {
             var foundReview = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == review.Id);
