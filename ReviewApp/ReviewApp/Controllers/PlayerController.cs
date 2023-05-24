@@ -18,5 +18,6 @@ namespace PlayCapsViewer.Controllers
             _playerService = playerService;
             _mapper = mapper;
         }
+
     }
 }

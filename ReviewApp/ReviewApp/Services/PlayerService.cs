@@ -44,6 +44,21 @@ namespace PlayCapsViewer.Services
             return await _context.Players.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Player?> GetPlayerOfPlayCap(int playCapId)
+        {
+            var playCap = await _context.PlayCaps.FirstOrDefaultAsync(x => x.Id == playCapId);
+            if (playCap == null)
+            {
+                return null;
+            }
+            var playCapsPlayer = await _context.PlayCapsPlayers.Where(x => x.PlayCapId == playCapId).FirstOrDefaultAsync();
+            if (playCapsPlayer == null)
+            {
+                return new Player();
+            }
+            return playCapsPlayer.Player;
+        }
+
         public async Task<ICollection<Player>> GetPlayers()
         {
             return await _context.Players.ToListAsync();
