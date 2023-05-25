@@ -41,7 +41,7 @@ namespace PlayCapsViewer.Controllers
         /// </summary>
         /// <param name="reviewerId">the id of the reviewer we want to fetch</param>
         /// <returns>Returns ReviewerDTO object if found</returns>
-        [HttpGet]
+        [HttpGet("{reviewerId}")]
         [ProducesResponseType(200, Type = typeof(ReviewDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -63,7 +63,7 @@ namespace PlayCapsViewer.Controllers
         /// </summary>
         /// <param name="reviewerName">the name of the reviewer we want to fetch</param>
         /// <returns>Returns ReviewerDTO object if reviewer exists</returns>
-        [HttpGet]
+        [HttpGet("{reviewerName}")]
         [ProducesResponseType(200, Type = typeof(ReviewDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -132,7 +132,7 @@ namespace PlayCapsViewer.Controllers
         /// </summary>
         /// <param name="reviewerId">the id of the reviewer we would like to delete</param>
         /// <returns>returns 204 if the deletion was successful, 4xx response otherwise</returns>
-        [HttpDelete]
+        [HttpDelete("{reviewerId}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
