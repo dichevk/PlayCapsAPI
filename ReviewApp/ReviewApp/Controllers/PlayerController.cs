@@ -143,7 +143,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// returns the updated player
         /// </remarks>
-        [HttpPut]
+        [HttpPut("{playerId}")]
         [ProducesResponseType(200, Type = typeof(PlayerDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

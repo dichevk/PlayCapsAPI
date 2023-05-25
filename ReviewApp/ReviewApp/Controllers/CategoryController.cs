@@ -130,7 +130,7 @@ namespace PlayCapsViewer.Controllers
         /// <remarks>
         /// Update a category using the category object 
         /// </remarks>
-        [HttpPut]
+        [HttpPut("{categoryId}")]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404, Type = typeof(string))]

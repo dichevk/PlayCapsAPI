@@ -109,7 +109,7 @@ namespace PlayCapsViewer.Controllers
         /// <param name="reviewerId">the id of the reviewer we would like to update</param>
         /// <param name="reviewerInput">The data sent from the frontend</param>
         /// <returns>returns the updated reviewerData </returns>
-        [HttpPut]
+        [HttpPut("{reviewerId}")]
         [ProducesResponseType(200, Type = typeof(ReviewerDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

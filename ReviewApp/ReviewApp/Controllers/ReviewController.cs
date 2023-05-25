@@ -200,7 +200,7 @@ namespace PlayCapsViewer.Controllers
         /// </summary>
         /// <param name="reviewInput">the input DTO for the review to be created
         /// <returns>the newly updated review if successful and if it exists already, 4xx otherwise</returns>
-        [HttpPut]
+        [HttpPut("{reviewId}")]
         [ProducesResponseType(200, Type = typeof(Review))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
