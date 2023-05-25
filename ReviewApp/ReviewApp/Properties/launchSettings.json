@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "PokemonReviewApp": {
+    "PlayCapsAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
