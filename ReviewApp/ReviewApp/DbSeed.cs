@@ -1,6 +1,5 @@
 ﻿using PlayCapsViewer.Data;
 using PlayCapsViewer.Models;
-using static Azure.Core.HttpHeader;
 
 namespace PlayCapsViewer
 {
@@ -15,7 +14,7 @@ namespace PlayCapsViewer
         {
             if (!dataContext.PlayCapsPlayers.Any())
             {
-                var pokemonOwners = new List<PlayCapsPlayer>()
+                var playCapOwners = new List<PlayCapsPlayer>()
                 {
                     new PlayCapsPlayer()
                     {
@@ -149,7 +148,7 @@ namespace PlayCapsViewer
                         }
                     }
                 };
-                dataContext.PlayCapsPlayers.AddRange(pokemonOwners);
+                dataContext.PlayCapsPlayers.AddRange(playCapOwners);
                 dataContext.SaveChanges();
             }
         }

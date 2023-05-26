@@ -2,3 +2,8 @@ global using Xunit;
 global using AutoMapper;
 global using FakeItEasy;
 global using FluentAssertions;
+global using PlayCapsViewer.Controllers;
+global using PlayCapsViewer.DTO;
+global using PlayCapsViewer.Interfaces;
+global using PlayCapsViewer.Models;
+global using Microsoft.AspNetCore.Mvc;
