@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayCapsViewer", "ReviewApp\PlayCapsViewer.csproj", "{EA868428-3CC8-4059-8AAE-18A86CD2FD5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewApp.Test", "ReviewApp.Test\ReviewApp.Test.csproj", "{120229DC-711F-4739-B26A-9AA274AF63A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewApp.Test", "ReviewApp.Test\ReviewApp.Test.csproj", "{120229DC-711F-4739-B26A-9AA274AF63A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

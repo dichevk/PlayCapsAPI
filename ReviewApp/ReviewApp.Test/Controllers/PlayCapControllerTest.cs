@@ -11,7 +11,7 @@
         }
 
         [Fact]
-        public void playCapController_GetplayCaps_ReturnOK()
+        public async Task playCapController_GetPlayCaps_ReturnOK()
         {
             //Arrange
             var playCaps = A.Fake<ICollection<PlayCapDTO>>();
@@ -20,7 +20,7 @@
             var controller = new PlayCapController(_playCapService, _mapper);
 
             //Act
-            var result = controller.GetAllPlayCaps();
+            var result = await controller.GetAllPlayCaps();
 
             //Assert
             result.Should().NotBeNull();
@@ -28,7 +28,7 @@
         }
 
         [Fact]
-        public void playCapController_CreateplayCap_ReturnOK()
+        public async Task playCapController_CreatePlayCap_ReturnOK()
         {
             //Arrange
             int playerId = 1;
@@ -37,8 +37,7 @@
             var playCap = A.Fake<PlayCap>();
             var playCapCreate = A.Fake<PlayCapDTO>();
             var playCaps = A.Fake<ICollection<PlayCapDTO>>();
-            var pokmonList = A.Fake<IList<PlayCapDTO>>();
-            A.CallTo(() => _playCapService.(playCapCreate)).Returns(playCap);
+            var playCapList = A.Fake<IList<PlayCapDTO>>();
             A.CallTo(() => _mapper.Map<PlayCap>(playCapCreate)).Returns(playCap);
             var controller = new PlayCapController(_playCapService, _mapper);
 
@@ -47,6 +46,7 @@
 
             //Assert
             result.Should().NotBeNull();
+            result.Should().BeOfType(typeof(OkObjectResult));
         }
     }
 }
