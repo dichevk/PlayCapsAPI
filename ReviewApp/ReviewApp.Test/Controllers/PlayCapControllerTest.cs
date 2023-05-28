@@ -29,27 +29,7 @@ namespace playCapReviewApp.Tests.Controller
             result.Should().BeOfType(typeof(OkObjectResult));
         }
 
-        [Fact]
-        public async Task PlayCapController_CreatePlayCap_ReturnOK()
-        {
-            //Arrange
-            int playerId = 1;
-            int catId = 2;
-            var playCapMap = A.Fake<PlayCap>();
-            var playCap = A.Fake<PlayCap>();
-            var playCapCreate = A.Fake<PlayCapDTO>();
-            var playCaps = A.Fake<ICollection<PlayCapDTO>>();
-            var playCapList = A.Fake<IList<PlayCapDTO>>();
-            A.CallTo(() => _mapper.Map<PlayCap>(playCapCreate)).Returns(playCap);
-            var controller = new PlayCapController(_playCapService, _mapper);
 
-            //Act
-            var result = await controller.CreatePlayCap(playCapCreate, playerId, catId);
-
-            //Assert
-            result.Should().NotBeNull();
-            //result.Should().BeAssignableTo<OkObjectResult>();
-        }
 
         [Fact]
         public async Task PlayCapController_GetAllPlayCaps_WithPlayCaps_ReturnsOkObjectResult()
@@ -148,6 +128,50 @@ namespace playCapReviewApp.Tests.Controller
             result.Should().NotBeNull().And.BeOfType<OkObjectResult>();
             var okResult = result as OkObjectResult;
             okResult.Value.Should().BeEquivalentTo(playCapDTO);
+        }
+        [Fact]
+        public async Task PlayCapController_CreatePlayCap_ReturnOK()
+        {
+            //Arrange
+            int playerId = 1;
+            int catId = 2;
+            var playCap = A.Fake<PlayCap>();
+            var playCapDTO = A.Fake<PlayCapDTO>();
+            var playCaps = A.Fake<ICollection<PlayCapDTO>>();
+            var playCapList = A.Fake<IList<PlayCapDTO>>();
+
+
+            A.CallTo(() => _mapper.Map<PlayCap>(playCapDTO)).Returns(playCap);
+            A.CallTo(() => _playCapService.CreatePlayCap(playCap, playerId, catId));
+            var controller = new PlayCapController(_playCapService, _mapper);
+
+            //Act
+            var result = await controller.CreatePlayCap(playCapDTO, playerId, catId);
+
+            //Assert
+            result.Should().NotBeNull();
+        }
+        [Fact]
+        public async Task PlayCapController_CreatePlayCap_ReturnNotOk()
+        {
+            //Arrange
+            int playerId = 1;
+            int catId = 2;
+            var playCap = A.Fake<PlayCap>();
+            var playCapDTO = A.Fake<PlayCapDTO>();
+            var playCaps = A.Fake<ICollection<PlayCapDTO>>();
+            var playCapList = A.Fake<IList<PlayCapDTO>>();
+
+            playCapDTO.Id = -999;//invalid Id
+            A.CallTo(() => _mapper.Map<PlayCap>(playCapDTO)).Returns(playCap);
+            A.CallTo(() => _playCapService.CreatePlayCap(playCap, playerId, catId));
+            var controller = new PlayCapController(_playCapService, _mapper);
+
+            //Act
+            var result = await controller.CreatePlayCap(playCapDTO, playerId, catId);
+
+            //Assert
+            result.Should().NotBeOfType<OkObjectResult>();
         }
 
         [Fact]
