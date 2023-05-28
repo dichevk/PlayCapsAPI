@@ -14,17 +14,11 @@
         }
 
         [Fact]
-        public async Task GetCategories_ReturnsAllCategories()
+        public async Task CategoryController_GetCategories_ReturnsAllCategories()
         {
             var categories = A.Fake<ICollection<CategoryDTO>>();
             var categoriesList = A.Fake<List<CategoryDTO>>();
             // Arrange
-            var categories2 = new List<Category>
-            {
-                new Category { Id = 1, Name = "Category 1" },
-                new Category { Id = 2, Name = "Category 2" },
-                new Category { Id = 3, Name = "Category 3" }
-            };
             var categoryDTOs = categories.Select(c => new CategoryDTO { Id = c.Id, Name = c.Name });
             A.CallTo(() => _mapper.Map<List<CategoryDTO>>(categories)).Returns(categoriesList);
 
@@ -36,7 +30,7 @@
                 .Which.Value.Should().BeEquivalentTo(categoryDTOs);
         }
         [Fact]
-        public async Task GetCategoriesByPlayCap_ReturnsCategoriesForPlayCap()
+        public async Task CategoryController_GetCategoriesByPlayCap_ReturnsCategoriesForPlayCap()
         {
             // Arrange
             int playCapId = 1;
@@ -58,7 +52,7 @@
         }
 
         [Fact]
-        public async Task GetCategoryById_WithValidId_ReturnsCategory()
+        public async Task CategoryController_GetCategoryById_WithValidId_ReturnsCategory()
         {
             // Arrange
             int categoryId = 1;
@@ -75,7 +69,7 @@
                 .Which.Value.Should().BeEquivalentTo(categoryDTO);
         }
         [Fact]
-        public async Task GetCategoryById_ExistingId_ReturnsOkObjectResult()
+        public async Task CategoryController_GetCategoryById_ExistingId_ReturnsOkObjectResult()
         {
             // Arrange
             var categoryId = 1;
@@ -90,7 +84,7 @@
         }
 
         [Fact]
-        public async Task GetCategoryById_NonExistingId_ReturnsNotFoundResult()
+        public async Task CategoryController_GetCategoryById_NonExistingId_ReturnsNotFoundResult()
         {
             // Arrange
             var categoryId = 1;
@@ -108,7 +102,7 @@
 
 
         [Fact]
-        public async Task GetCategoriesByPlayCap_NonExistingId_ReturnsNotFoundResult()
+        public async Task CategoryController_GetCategoriesByPlayCap_NonExistingId_ReturnsNotFoundResult()
         {
             // Arrange
             var playCapId = 1;
@@ -129,7 +123,7 @@
 
 
         [Fact]
-        public async Task DeleteCategory_ExistingId_ReturnsOkObjectResult()
+        public async Task CategoryController_DeleteCategory_ExistingId_ReturnsOkObjectResult()
         {
             // Arrange
             var categoryId = 1;
@@ -145,7 +139,7 @@
         }
 
         [Fact]
-        public async Task DeleteCategory_NonExistingId_ReturnsNotFoundResult()
+        public async Task CategoryController_DeleteCategory_NonExistingId_ReturnsNotFoundResult()
         {
             // Arrange
             var categoryId = 1;
@@ -161,7 +155,7 @@
         }
 
         [Fact]
-        public async Task UpdateCategory_ValidData_ReturnsOkObjectResult()
+        public async Task CategoryController_UpdateCategory_ValidData_ReturnsOkObjectResult()
         {
             // Arrange
             var categoryDTO = new CategoryDTO { Id = 1, Name = "Updated Category" };
@@ -176,7 +170,7 @@
             result.Should().BeOfType<OkObjectResult>();
         }
         [Fact]
-        public async Task CreateCategory_ValidData_ReturnsOkObjectResult()
+        public async Task CategoryController_CreateCategory_ValidData_ReturnsOkObjectResult()
         {
             // Arrange
             var categoryDTO = new CategoryDTO { Id = 1, Name = "Category 1" };
