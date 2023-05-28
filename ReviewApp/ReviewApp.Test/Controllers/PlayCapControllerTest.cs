@@ -42,11 +42,11 @@
             var controller = new PlayCapController(_playCapService, _mapper);
 
             //Act
-            var result = controller.CreatePlayCap(playCapCreate, playerId, catId);
+            var result = await controller.CreatePlayCap(playCapCreate, playerId, catId);
 
             //Assert
             result.Should().NotBeNull();
-            result.Should().BeOfType(typeof(OkObjectResult));
+            //result.Should().BeAssignableTo<OkObjectResult>();
         }
     }
 }

@@ -74,5 +74,121 @@
             result.Should().BeOfType<OkObjectResult>()
                 .Which.Value.Should().BeEquivalentTo(categoryDTO);
         }
+        [Fact]
+        public async Task GetCategoryById_ExistingId_ReturnsOkObjectResult()
+        {
+            // Arrange
+            var categoryId = 1;
+            var category = new Category { Id = categoryId, Name = "Category 1" };
+            A.CallTo(() => _categoryService.GetCategory(categoryId)).Returns(category);
+
+            // Act
+            var result = await _categoryController.GetCategoryById(categoryId);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+        }
+
+        [Fact]
+        public async Task GetCategoryById_NonExistingId_ReturnsNotFoundResult()
+        {
+            // Arrange
+            var categoryId = 1;
+            A.CallTo(() => _categoryService.GetCategory(categoryId)).Returns(Task.FromResult<Category>(null));
+
+            // Act
+            var result = await _categoryController.GetCategoryById(categoryId);
+
+            // Assert
+            result.Should().BeOfType<NotFoundObjectResult>();
+            var notFoundResult = result.Should().BeOfType<NotFoundObjectResult>().Subject;
+            notFoundResult.Value.Should().Be("Category was not found");
+        }
+
+
+
+        [Fact]
+        public async Task GetCategoriesByPlayCap_NonExistingId_ReturnsNotFoundResult()
+        {
+            // Arrange
+            var playCapId = 1;
+            var categories = new List<Category>(); // Empty categories list
+            A.CallTo(() => _categoryService.GetCategoriesByPlayCapId(playCapId)).Returns(categories);
+
+            // Act
+            var result = await _categoryController.GetCategoriesByPlayCap(playCapId);
+
+            // Assert
+            result.Should().BeOfType<NotFoundObjectResult>();
+            var notFoundResult = result.Should().BeOfType<NotFoundObjectResult>().Subject;
+            notFoundResult.Value.Should().Be("Id of the playcap was not found in correlation with the Category");
+        }
+
+
+
+
+
+        [Fact]
+        public async Task DeleteCategory_ExistingId_ReturnsOkObjectResult()
+        {
+            // Arrange
+            var categoryId = 1;
+            A.CallTo(() => _categoryService.DeleteCategory(categoryId)).Returns(true);
+
+            // Act
+            var result = await _categoryController.DeleteCategory(categoryId);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+            okResult.Value.Should().Be(true);
+        }
+
+        [Fact]
+        public async Task DeleteCategory_NonExistingId_ReturnsNotFoundResult()
+        {
+            // Arrange
+            var categoryId = 1;
+            A.CallTo(() => _categoryService.DeleteCategory(categoryId)).Returns(false);
+
+            // Act
+            var result = await _categoryController.DeleteCategory(categoryId);
+
+            // Assert
+            result.Should().BeOfType<NotFoundObjectResult>();
+            var notFoundResult = result.Should().BeOfType<NotFoundObjectResult>().Subject;
+            notFoundResult.Value.Should().Be("Category was not found");
+        }
+
+        [Fact]
+        public async Task UpdateCategory_ValidData_ReturnsOkObjectResult()
+        {
+            // Arrange
+            var categoryDTO = new CategoryDTO { Id = 1, Name = "Updated Category" };
+            var category = new Category { Id = categoryDTO.Id, Name = categoryDTO.Name };
+            A.CallTo(() => _mapper.Map<Category>(categoryDTO)).Returns(category);
+            A.CallTo(() => _categoryService.UpdateCategory(category)).Returns(category);
+
+            // Act
+            var result = await _categoryController.UpdateCategory(categoryDTO);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+        }
+        [Fact]
+        public async Task CreateCategory_ValidData_ReturnsOkObjectResult()
+        {
+            // Arrange
+            var categoryDTO = new CategoryDTO { Id = 1, Name = "Category 1" };
+            var category = new Category { Id = categoryDTO.Id, Name = categoryDTO.Name };
+            A.CallTo(() => _mapper.Map<Category>(categoryDTO)).Returns(category);
+            A.CallTo(() => _categoryService.CreateCategory(category)).Returns(category);
+
+            // Act
+            var result = await _categoryController.CreateCategory(categoryDTO);
+
+            // Assert
+            result.Should().BeOfType<OkObjectResult>();
+        }
     }
 }
