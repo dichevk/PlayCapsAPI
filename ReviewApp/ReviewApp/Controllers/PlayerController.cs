@@ -110,7 +110,7 @@ namespace PlayCapsViewer.Controllers
         [ProducesResponseType(200, Type = typeof(Player))]
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> Createplayer([FromBody] Player playerCreate)
+        public async Task<IActionResult> CreatePlayer([FromBody] Player playerCreate)
         {
             if (playerCreate == null)
                 return BadRequest(ModelState);
