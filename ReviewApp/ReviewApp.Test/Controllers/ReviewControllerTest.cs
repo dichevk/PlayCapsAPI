@@ -1,4 +1,8 @@
-﻿namespace ReviewApp.Test.Controllers
+﻿using FakeItEasy;
+using PlayCapsViewer.DTO;
+using PlayCapsViewer.Models;
+
+namespace ReviewApp.Test.Controllers
 {
     public class ReviewControllerTests
     {
@@ -210,6 +214,7 @@
             var badRequestResult = result as BadRequestObjectResult;
             badRequestResult.Value.Should().BeOfType<SerializableError>();
         }
+
         [Fact]
         public async Task ReviewController_CreateReview_ReturnsOkResponse()
         {
