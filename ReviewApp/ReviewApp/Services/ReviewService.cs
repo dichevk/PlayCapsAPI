@@ -15,9 +15,18 @@ namespace PlayCapsViewer.Services
 
         public async Task<Review> CreateReview(Review review)
         {
-            await _context.AddAsync(review);
-            await _context.SaveChangesAsync();
-            return review;
+            var foundReview = await _context.Reviews.FirstOrDefaultAsync(x => x.Id == review.Id);
+            if (foundReview != null) return null;
+            var newReview = await _context.AddAsync(review);
+            try
+            {
+                var saved = await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new InvalidOperationException();
+            }
+            return newReview.Entity;
         }
 
         public async Task<bool> DeleteReview(int reviewId)

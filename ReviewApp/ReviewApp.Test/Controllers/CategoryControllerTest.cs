@@ -1,4 +1,4 @@
-﻿namespace PlayCapsViewer.Tests.Controllers
+﻿namespace ReviewApp.Test.Controllers
 {
     public class CategoryControllerTests
     {

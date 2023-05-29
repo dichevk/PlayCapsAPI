@@ -1,5 +1,4 @@
-﻿
-namespace ReviewApp.Test.Controllers
+﻿namespace ReviewApp.Test.Controllers
 {
     public class PlayerControllerTest
     {

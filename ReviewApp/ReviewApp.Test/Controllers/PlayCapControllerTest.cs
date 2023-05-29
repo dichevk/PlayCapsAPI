@@ -1,6 +1,4 @@
-﻿using FakeItEasy;
-
-namespace playCapReviewApp.Tests.Controller
+﻿namespace ReviewApp.Test.Controllers
 {
     public class PlayCapControllerTests
     {
@@ -194,5 +192,6 @@ namespace playCapReviewApp.Tests.Controller
             // Assert
             result.Should().NotBeNull().And.BeOfType<NoContentResult>();
         }
+
     }
 }

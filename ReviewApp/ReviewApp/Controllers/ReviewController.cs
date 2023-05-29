@@ -172,7 +172,6 @@ namespace PlayCapsViewer.Controllers
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(Review))]
         [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
         [ProducesResponseType(422)]
         public async Task<IActionResult> CreateReview([FromBody] ReviewDTO reviewInput)
         {
@@ -183,13 +182,7 @@ namespace PlayCapsViewer.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             if (result == null)
-            {
-                return NotFound("Creating a review failed");
-            }
-            var existingReview = await _reviewService.GetReviewById(reviewInput.Id);
-            if (existingReview != null)
             {
                 return UnprocessableEntity();
             }
