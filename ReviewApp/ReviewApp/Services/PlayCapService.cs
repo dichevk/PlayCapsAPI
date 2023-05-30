@@ -28,7 +28,8 @@ namespace PlayCapsViewer.Services
                 PlayCap = playCap,
                 Category = category
             };
-
+            await _context.AddAsync(newPlayCapsPlayer);
+            await _context.AddAsync(playCapCategory);
             await _context.AddAsync(playCap);
             await _context.SaveChangesAsync();
             return playCap;

@@ -25,7 +25,7 @@ namespace ReviewApp.Test
                         StartDate = new DateTime(1903, 1, 1),
                         PlayCapsCategory = new List<PlayCapsCategory>()
                             {
-                                new PlayCapsCategory { Category = new Category() { Name = "Electric"}}
+                                new PlayCapsCategory { Category = new Category() {Id = i, Name = "Electric"}}
                             },
                         Reviews = new List<Review>()
                             {
