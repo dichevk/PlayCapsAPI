@@ -41,5 +41,34 @@ namespace ReviewApp.Test.Services
             //Assert
             result.Should().BeNull();
         }
+
+        [Fact]
+        public async void PlayCapService_GetPlayCapByName_ReturnsPlayCap()
+        {
+            //Arrange
+            var name = "Pikachu Tazo";
+            var dbContext = new DbContextTestSetup();
+            var dbSetup = await dbContext.GetDatabaseContext();
+            var playCapService = new PlayCapService(dbSetup);
+            //Act 
+            var result = await playCapService.GetPlayCapByName(name);
+            //Assert
+            result.Should().BeOfType<PlayCap>();
+            result.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async void PlayCapService_GetPlayCapByNameWrongInput_ReturnsNull()
+        {
+            //Arrange
+            var name = "Nonexistententry";
+            var dbContext = new DbContextTestSetup();
+            var dbSetup = await dbContext.GetDatabaseContext();
+            var playCapService = new PlayCapService(dbSetup);
+            //Act 
+            var result = await playCapService.GetPlayCapByName(name);
+            //Assert
+            result.Should().BeNull();
+        }
     }
 }
