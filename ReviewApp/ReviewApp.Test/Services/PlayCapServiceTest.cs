@@ -1,10 +1,9 @@
-﻿using PlayCapsViewer.Data.Enums;
-using PlayCapsViewer.Services;
+﻿using PlayCapsViewer.Services;
 namespace ReviewApp.Test.Services
 {
     public class PlayCapServiceTest
     {
-        PlayCapService _playCapService;
+        private PlayCapService _playCapService;
         public async void Init()
         {
             var dbContext = new DbContextTestSetup();
@@ -67,6 +66,7 @@ namespace ReviewApp.Test.Services
             var result = await _playCapService.GetPlayCapByName(name);
             //Assert
             result.Should().BeNull();
+
         }
     }
 }
