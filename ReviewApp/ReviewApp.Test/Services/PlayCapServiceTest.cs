@@ -1,17 +1,23 @@
-﻿using PlayCapsViewer.Services;
+﻿using PlayCapsViewer.Data.Enums;
+using PlayCapsViewer.Services;
 namespace ReviewApp.Test.Services
 {
     public class PlayCapServiceTest
     {
+        PlayCapService _playCapService;
+        public async void Init()
+        {
+            var dbContext = new DbContextTestSetup();
+            var dbSetup = await dbContext.GetDatabaseContext();
+            _playCapService = new PlayCapService(dbSetup);
+        }
         [Fact]
         public async void PlayCapService_GetAllPlayCaps_ReturnsListOfPlayCaps()
         {
             //Arrange
-            var dbContext = new DbContextTestSetup();
-            var dbSetup = await dbContext.GetDatabaseContext();
-            var playCapService = new PlayCapService(dbSetup);
+            Init();
             //Act 
-            var result = await playCapService.GetAllPlayCaps();
+            var result = await _playCapService.GetAllPlayCaps();
             //Assert
             result.Should().NotBeNull();
             result.Should().BeOfType<List<PlayCap>>();
@@ -20,11 +26,9 @@ namespace ReviewApp.Test.Services
         public async void PlayCapService_GetPlayCapById_ReturnsPlayCap()
         {
             //Arrange
-            var dbContext = new DbContextTestSetup();
-            var dbSetup = await dbContext.GetDatabaseContext();
-            var playCapService = new PlayCapService(dbSetup);
+            Init();
             //Act 
-            var result = await playCapService.GetPlayCap(1);
+            var result = await _playCapService.GetPlayCap(1);
             //Assert
             result.Should().NotBeNull();
             result.Should().BeOfType<PlayCap>();
@@ -33,11 +37,9 @@ namespace ReviewApp.Test.Services
         public async void PlayCapService_InvalidGetPlayCapById_ReturnsNull()
         {
             //Arrange
-            var dbContext = new DbContextTestSetup();
-            var dbSetup = await dbContext.GetDatabaseContext();
-            var playCapService = new PlayCapService(dbSetup);
+            Init();
             //Act 
-            var result = await playCapService.GetPlayCap(100000000);
+            var result = await _playCapService.GetPlayCap(100000000);
             //Assert
             result.Should().BeNull();
         }
@@ -47,11 +49,9 @@ namespace ReviewApp.Test.Services
         {
             //Arrange
             var name = "Pikachu Tazo";
-            var dbContext = new DbContextTestSetup();
-            var dbSetup = await dbContext.GetDatabaseContext();
-            var playCapService = new PlayCapService(dbSetup);
+            Init();
             //Act 
-            var result = await playCapService.GetPlayCapByName(name);
+            var result = await _playCapService.GetPlayCapByName(name);
             //Assert
             result.Should().BeOfType<PlayCap>();
             result.Should().NotBeNull();
@@ -62,11 +62,9 @@ namespace ReviewApp.Test.Services
         {
             //Arrange
             var name = "Nonexistententry";
-            var dbContext = new DbContextTestSetup();
-            var dbSetup = await dbContext.GetDatabaseContext();
-            var playCapService = new PlayCapService(dbSetup);
+            Init();
             //Act 
-            var result = await playCapService.GetPlayCapByName(name);
+            var result = await _playCapService.GetPlayCapByName(name);
             //Assert
             result.Should().BeNull();
         }
