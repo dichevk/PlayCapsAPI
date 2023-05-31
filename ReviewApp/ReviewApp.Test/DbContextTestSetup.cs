@@ -40,6 +40,23 @@ namespace ReviewApp.Test
                         Description = "Powerful Tazo",
                         EndDate = new DateTime(9999, 1, 1),
                     });
+                    databaseContext.Add(
+                        new Country
+                        {
+                            Id = i,
+                            Name = "Azuka",
+                            Players = new List<Player>()
+                            {
+                               new Player()
+                               {
+                                   Id=i,
+                                   FirstName="rain",
+                                   LastName="tt",
+                                   Country=new Country(),
+                                   Gym = "Pikachu's gym"
+                               }
+                            }
+                        });
                     await databaseContext.SaveChangesAsync();
                 }
             }
