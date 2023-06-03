@@ -68,5 +68,15 @@ namespace ReviewApp.Test.Services
             result.Should().BeNull();
 
         }
+        [Fact]
+        public async void PlayCapService_GetPlayCapRating_ReturnsDecimalInRangeOneToTen()
+        {
+            //Arrange
+            Init();
+            //Act 
+            var result = await _playCapService.GetPlayCapRating(1);
+            //Assert
+            result.Should().BeInRange(1, 10);
+        }
     }
 }
