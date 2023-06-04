@@ -3,6 +3,9 @@ using PlayCapsViewer;
 using PlayCapsViewer.Data;
 using PlayCapsViewer.Interfaces;
 using PlayCapsViewer.Services;
+using Hangfire;
+using Hangfire.SqlServer;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +35,17 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     // connect to the db via the connection string 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-}); 
+});
 
+//Hangifre 
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")); ; // Replace with your SQL Server connection string
+});
 var app = builder.Build();
+
+app.MapHangfireDashboard();
+app.UseHangfireServer();
 
 //call seeding
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
