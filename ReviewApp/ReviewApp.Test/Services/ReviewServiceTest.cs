@@ -50,7 +50,7 @@ namespace ReviewApp.Test.Services
             result.Should().BeNull();
         }
         [Fact]
-        public async void ReviewService__ReturnsNull()
+        public async void ReviewService_CreateReview_ReturnsReview()
         {
             //Arrange
             Init();
