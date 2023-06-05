@@ -22,7 +22,6 @@ namespace PlayCapsViewer.Services
             }
             await _context.SaveChangesAsync();
             return newPlayer.Entity;
-
         }
 
         public async Task<bool> DeletePlayer(int playerId)
@@ -64,7 +63,6 @@ namespace PlayCapsViewer.Services
         {
             return await _context.Players.ToListAsync();
         }
-
         public async Task<Player?> UpdatePlayer(Player player)
         {
             var foundPlayer = await _context.Players.FirstOrDefaultAsync(x => x.Id == player.Id);
