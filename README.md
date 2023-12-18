@@ -1,0 +1,1 @@
+PlayCaps is a backend API in ASP.NET C# that provides backend functionality for virtualization of a game in which you can interact with and review playcaps (metal caps with different properties and motives generally inspired from fictional characters)
